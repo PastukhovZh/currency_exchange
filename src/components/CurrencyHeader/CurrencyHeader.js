@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/react"
 import { PropTypes } from "prop-types"
 
 const CurrencyHeader = (props) => {
+    
     return (
             <ul>
                 <Box display='flex'>

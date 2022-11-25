@@ -57,7 +57,7 @@ useEffect(() => {
   const USD = rates['UAH'] / rates['USD'] 
 console.log()
   return (
-    <Box textAlign='center' maxW='1200px' >
+    <Box textAlign='center' maxW='1200px'margin='auto' >
       <Box display='flex'>
       <CurrencyHeader
         currency={'EUR'}
@@ -66,7 +66,7 @@ console.log()
         currency={'USD'}
           amount={Number(USD.toFixed(6))} />
         </Box>
-
+<Box>
       <Text fontSize='xxx-large'>Currency converter</Text>
       <CurrencyInput
         currencies={Object.keys(rates)}
@@ -82,7 +82,7 @@ console.log()
         onAmountChange={handleAmount2Change}
         onCurrencyChange ={handleCurrency2Change}
       />
-
+</Box>
     </Box >
   );
 };
