@@ -19,6 +19,7 @@ const [rates, setRates] = useState([])
       handleAmount1Change(1)
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rates])
 useEffect(() => {
   axios.get('http://data.fixer.io/api/latest?access_key=61f01c67c914d1b6356c8ea4dc838dcf').then(response => {
