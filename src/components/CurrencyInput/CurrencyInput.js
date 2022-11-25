@@ -2,14 +2,14 @@ import { PropTypes } from "prop-types"
 
 const CurrencyInput = (props) => {
     return(
-    <>
-            <input type='text' value={props.amount} onChange={e=>props.onAmountChange(e.target.value)} />
+        <div >
+            <input  type='text' value={props.amount} onChange={e=>props.onAmountChange(e.target.value)} />
             <select value={props.currency} onChange={e=>props.onCurrencyChange(e.target.value)}>
                 {props.currencies.map((currency => (
-                    <option value={currency}>{currency}</option>
+                    <option  value={currency}>{currency}</option>
                 )))}
     </select>
-        </>
+        </div>
     )
 }
 

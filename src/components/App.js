@@ -1,5 +1,7 @@
+import { Box, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CurrencyHeader from "./CurrencyHeader/CurrencyHeader";
 import CurrencyInput from "./CurrencyInput/CurrencyInput";
 
 export const App = () => {
@@ -10,21 +12,25 @@ const [amount2, setAmount2] = useState(1)
   const [currency1, setCurrency1] = useState('USD')
   const [currency2, setCurrency2] = useState('UAH')
 
-
 const [rates, setRates] = useState([])
+  useEffect(() => {
+    const isRates = !Boolean(rates)
+    if (!isRates) {
+      handleAmount1Change(1)
+    }
 
+  }, [rates])
 useEffect(() => {
-  axios.get('http://data.fixer.io/api/latest?access_key=3c346a871091a291f488da7227f927ff').then(response => {
+  axios.get('http://data.fixer.io/api/latest?access_key=61f01c67c914d1b6356c8ea4dc838dcf').then(response => {
   setRates(response.data.rates)
 })
 }, [])
 
-  
-console.log(rates===rates)
-  
+  // console.log(rates['USD']*rates['UAH'])
+  // console.log(rates['EUR']*rates['UAH'])
   
   const format = (number) => {
-    return number.toFixed(2)
+    return Number(number.toFixed(2))
   }
   const handleAmount1Change = (amount1) => {
     setAmount2(format(amount1 * rates[currency2]/rates[currency1]))
@@ -45,9 +51,22 @@ console.log(rates===rates)
     setAmount1(format(amount2 * rates[currency1] / rates[currency2]))
     setCurrency2(currency2)
   }
-  
+
+  const UAH = rates['UAH']
+  const USD = rates['UAH'] / rates['USD'] 
+console.log()
   return (
-    <div>
+    <Box textAlign='center' maxW='1200px' >
+      <Box display='flex'>
+      <CurrencyHeader
+        currency={'EUR'}
+        amount={UAH} />
+      <CurrencyHeader
+        currency={'USD'}
+          amount={Number(USD.toFixed(6))} />
+        </Box>
+
+      <Text fontSize='xxx-large'>Currency converter</Text>
       <CurrencyInput
         currencies={Object.keys(rates)}
         amount={amount1}
@@ -62,6 +81,7 @@ console.log(rates===rates)
         onAmountChange={handleAmount2Change}
         onCurrencyChange ={handleCurrency2Change}
       />
-    </div>
+
+    </Box >
   );
 };
